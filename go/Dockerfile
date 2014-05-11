@@ -4,10 +4,10 @@
 # go
 #
 # Example :
-#   docker run november-eleven/go go version
-#   docker run -v `pwd`:/src november-eleven/go /bin/bash -c "gox-docker /src github.com/example/go"
+#   docker run novembereleven/go go version
+#   docker run -v `pwd`:/src novembereleven/go /bin/bash -c "gox-docker /src github.com/example/go"
 
-# VERSION 0.1.1
+# VERSION 0.1.1-2
 
 FROM debian:7.4
 
@@ -53,3 +53,4 @@ RUN gox -build-toolchain
 
 # write docker wrapper
 ADD ./gox-docker /usr/local/bin/gox-docker
+RUN chmod 0744 /usr/local/bin/gox-docker
