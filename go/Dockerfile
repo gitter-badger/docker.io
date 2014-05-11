@@ -1,33 +1,55 @@
-FROM ubuntu:12.04
+# november-eleven/docker.io
+# For more information: http://github.com/november-eleven/docker.io
+#
+# go
+#
+# Example :
+#   docker run november-eleven/go go version
+#   docker run -v `pwd`:/src november-eleven/go /bin/bash -c "gox-docker /src github.com/example/go"
+
+# VERSION 0.1.1
+
+FROM debian:7.4
 
 MAINTAINER november-eleven <november-eleven.fr>
 
-# env vars
+# define env
 ENV HOME /root
 ENV GOPATH /root/go
 ENV GOROOT /usr/local/go
 ENV PATH $PATH:$GOPATH/bin:$GOROOT/bin
 
-# GOPATH
+# create go workspace
 RUN mkdir -p $GOPATH
+RUN mkdir -p $GOPATH/bin
+RUN mkdir -p $GOPATH/pkg
+RUN mkdir -p $GOPATH/src
 
-# apt
+# execute apt required operation
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y build-essential mercurial git-core subversion wget curl zip vim ca-certificates 
 
-# go 1.2 tarball
+# make go 1.2.2 from tarball
 RUN wget --no-verbose https://storage.googleapis.com/golang/go1.2.2.src.tar.gz
 RUN echo "3ce0ac4db434fc1546fec074841ff40dc48c1167 *go1.2.2.src.tar.gz" | sha1sum -c -
 RUN tar -v -C /usr/local -xzf go1.2.2.src.tar.gz
 RUN cd /usr/local/go/src && ./make.bash --no-clean 2>&1
-
-# define workspace
-WORKDIR $GOPATH
+RUN rm go1.2.2.src.tar.gz
 
 # removed unnecessary packages
 RUN apt-get autoremove -y
 
 # clear package repository cache
 RUN apt-get clean all
+
+# define workspace
+WORKDIR /root/go
+
+# get gox for go cross compilation platform
+RUN go get github.com/mitchellh/gox
+RUN gox -build-toolchain
+
+# write docker wrapper
+ADD ./gox-docker /usr/local/bin/gox-docker
