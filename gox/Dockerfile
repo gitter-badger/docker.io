@@ -4,8 +4,8 @@
 # gox
 #
 # Example :
-#   docker run novembereleven/gox go version
-#   docker run -v `pwd`:/src novembereleven/gox /bin/bash -c "gox-docker /src github.com/example/go"
+#   docker run --rm -t -i novembereleven/gox go version
+#   docker run --rm -t -i -v `pwd`:/src novembereleven/gox /bin/bash -c "gox-docker /src github.com/example/go"
 
 # VERSION 0.1.0
 
