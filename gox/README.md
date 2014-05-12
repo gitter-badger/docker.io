@@ -12,7 +12,9 @@ This docker container is provided with a go cross compilation platform: gox.
 
 ### Usage
 
-`docker run --rm -t -i -v `pwd`:/src novembereleven/gox /bin/bash -c "gox-docker /src github.com/example/go"`
+```
+docker run --rm -t -i -v `pwd`:/src novembereleven/gox /bin/bash -c "gox-docker /src github.com/example/go"
+```
 
 ### Bugs / Contributing
 

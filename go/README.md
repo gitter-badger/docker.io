@@ -12,7 +12,9 @@ This docker container is provided with a minimalist go environment.
 
 ### Usage
 
-`docker run --rm -t -i novembereleven/go /bin/bash`
+```
+docker run --rm -t -i novembereleven/go /bin/bash
+```
 
 ### Bugs / Contributing
 
