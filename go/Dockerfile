@@ -7,7 +7,7 @@
 #   docker run novembereleven/go go version
 #   docker run -v `pwd`:/src novembereleven/go /bin/bash -c "gox-docker /src github.com/example/go"
 
-# VERSION 0.1.1-2
+# VERSION 0.1.2
 
 FROM debian:7.4
 
@@ -46,11 +46,3 @@ RUN apt-get clean all
 
 # define workspace
 WORKDIR /root/go
-
-# get gox for go cross compilation platform
-RUN go get github.com/mitchellh/gox
-RUN gox -build-toolchain
-
-# write docker wrapper
-ADD ./gox-docker /usr/local/bin/gox-docker
-RUN chmod 0744 /usr/local/bin/gox-docker
