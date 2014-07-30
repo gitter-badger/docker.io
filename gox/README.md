@@ -23,5 +23,5 @@ docker run --rm -t -i -v `pwd`:/src novembereleven/gox /bin/bash -c "gox-docker 
 Make contributions the usual way through [GitHub](https://github.com/november-eleven/docker.io), request changes and ask questions in comments below or [email me directly](https://github.com/november-eleven/)
 
 ### Version
-* **go:** 1.2.2
-* **debian:** 7.4
+* **go:** 1.3
+* **debian:** 7.6
